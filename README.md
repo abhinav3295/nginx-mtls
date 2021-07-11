@@ -13,4 +13,15 @@ This project demos :
 
 # Setup
 
+## starting server
 * execute `./start.sh`
+
+## making request
+
+```
+curl -k -vvvv \
+    --cacert output/cert/caCert.pem \
+    --cert output/cert/user.pem \
+    --key output/cert/user.key \
+    "https://localhost:8443"
+```

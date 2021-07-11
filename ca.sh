@@ -23,6 +23,7 @@ cat >${SAN_CONFIG_LEAF} <<EOL
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=critical, CA:FALSE
 keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth, clientAuth
 EOL
 
 ## CA Certs
