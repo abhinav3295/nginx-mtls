@@ -16,13 +16,14 @@ export WEBSERV_DN="/C=SG/ST=Singapore/L=Singapore/O=SSL Demo/OU=Webiste Server/C
 cat >${SAN_CONFIG} <<EOL
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=critical, CA:TRUE
-keyUsage =critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+keyUsage =critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment, keyCertSign
+extendedKeyUsage = serverAuth, clientAuth
 EOL
 
 cat >${SAN_CONFIG_LEAF} <<EOL
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=critical, CA:FALSE
-keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+keyUsage =critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 extendedKeyUsage = serverAuth, clientAuth
 EOL
 
@@ -42,6 +43,7 @@ openssl req -new -newkey rsa:2048 -nodes -out ${USER_CSR} -keyout ${USER_PRIVATE
 
 # Sign CSR
 openssl x509 -req -sha256 -CAcreateserial -days 825 -in ${USER_CSR} -CA ${ISSUER_CERT} -CAkey ${ISSUER_PRIVATE_KEY} -extfile ${SAN_CONFIG_LEAF} -out ${USER_CERT} 
+cat ${USER_CERT} ${ISSUER_CERT} ${CA_CERT} > ${USER_FULL_CHAIN_CERT}
 
 ## Website Server Certs
 # Generate WEBSERV Cert
@@ -49,3 +51,4 @@ openssl req -new -newkey rsa:2048 -nodes -out ${WEBSERV_CSR} -keyout ${WEBSERV_P
 
 # Sign CSR
 openssl x509 -req -sha256 -CAcreateserial -days 825 -in ${WEBSERV_CSR} -CA ${ISSUER_CERT} -CAkey ${ISSUER_PRIVATE_KEY} -extfile ${SAN_CONFIG_LEAF} -out ${WEBSERV_CERT} 
+cat ${WEBSERV_CERT} ${ISSUER_CERT} ${CA_CERT} > ${WEBSERV_FULLCHAIN_CERT}

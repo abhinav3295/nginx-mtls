@@ -21,7 +21,7 @@ This project demos :
 ```
 curl -k -vvvv \
     --cacert output/cert/caCert.pem \
-    --cert output/cert/user.pem \
+    --cert output/cert/user_fullchain.pem \
     --key output/cert/user.key \
     "https://localhost:8443"
 ```
@@ -30,18 +30,7 @@ Wiremock backend is deployed at `/upstream`, it can be reached at:
 ```
 curl -k -vvvv \
     --cacert output/cert/caCert.pem \
-    --cert output/cert/user.pem \
+    --cert output/cert/user_fullchain.pem \
     --key output/cert/user.key \
-    "https://localhost:8443/upstream/some/thing"
-```
-
-## Known issues:
-* `user.pem` and `webserv.pem` are not being verifiied by using `caCert.pem`
-* For time being use `issuer.pem` and `issuer.key` as client certificates. eg:
-```
-curl -k -vvvv \
-    --cacert output/cert/caCert.pem \
-    --cert output/cert/issuer.pem \
-    --key output/cert/issuer.key \
     "https://localhost:8443/upstream/some/thing"
 ```

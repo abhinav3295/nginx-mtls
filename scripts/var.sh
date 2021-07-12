@@ -10,7 +10,9 @@ export ISSUER_CERT=${CERT_DIR}/issuer.pem
 export USER_PRIVATE_KEY=${CERT_DIR}/user.key
 export USER_CSR=${CERT_DIR}/user.csr
 export USER_CERT=${CERT_DIR}/user.pem
+export USER_FULL_CHAIN_CERT=${CERT_DIR}/user_fullchain.pem
 
 export WEBSERV_PRIVATE_KEY=${CERT_DIR}/webserv.key
 export WEBSERV_CSR=${CERT_DIR}/webserv.csr
 export WEBSERV_CERT=${CERT_DIR}/webserv.pem
+export WEBSERV_FULLCHAIN_CERT=${CERT_DIR}/website_fullchain.pem
