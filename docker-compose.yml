@@ -12,8 +12,6 @@ services:
     image: rodolpheche/wiremock:main
     volumes:
       - ./wiremock/stubs:/home/wiremock
-    ports:
-      - "8080:8080"
     entrypoint:
       - "/docker-entrypoint.sh"
       - "--verbose"
