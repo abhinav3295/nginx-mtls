@@ -8,9 +8,6 @@ cat ${WEBSERV_CERT} ${ISSUER_CERT} ${CA_CERT} > ${SERVER_BUNDLE}
 
 rm -f /etc/nginx/conf.d/default.conf
 cat >${NGINX_CONFIG} <<EOL
-upstream bac {
-    server backend;
-}
 server {
     listen       443 ssl;
     server_name  localhost;
@@ -40,7 +37,7 @@ server {
         proxy_set_header X-Real-IP \$remote_addr;                        
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;  
 
-        proxy_pass http://backend;
+        proxy_pass http://backend:8080;
 
     }
 
