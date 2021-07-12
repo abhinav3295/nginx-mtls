@@ -9,12 +9,12 @@ This project demos :
     1. passing client certificate dn to an upstream
 
 # Pre Requisite
-* You will need docket to get started
+* You will need `docker-compose` and `docker` installed on your system to get started
 
 # Setup
 
 ## starting server
-* execute `./start.sh`
+* execute `docker-compose up`
 
 ## making request
 
