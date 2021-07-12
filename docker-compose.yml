@@ -3,11 +3,11 @@ services:
   gateway:
     image: nginx:1.20
     volumes:
-      - ./:/opt
+      - ./gateway:/opt
     ports:
       - "8443:443"
     working_dir: /opt
-    entrypoint: bash boot.sh
+    entrypoint: ./boot.sh
   backend:
     image: rodolpheche/wiremock:main
     volumes:

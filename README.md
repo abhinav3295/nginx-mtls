@@ -19,18 +19,18 @@ This project demos :
 ## making request
 
 ```
-curl -k -vvvv \
-    --cacert output/cert/caCert.pem \
-    --cert output/cert/user_fullchain.pem \
-    --key output/cert/user.key \
+curl -vvvv \
+    --cacert gateway/output/cert/caCert.pem \
+    --cert gateway/output/cert/user_fullchain.pem \
+    --key gateway/output/cert/user.key \
     "https://localhost:8443"
 ```
 
 Wiremock backend is deployed at `/upstream`, it can be reached at:
 ```
-curl -k -vvvv \
-    --cacert output/cert/caCert.pem \
-    --cert output/cert/user_fullchain.pem \
-    --key output/cert/user.key \
+curl -vvvv \
+    --cacert gateway/output/cert/caCert.pem \
+    --cert gateway/output/cert/user_fullchain.pem \
+    --key gateway/output/cert/user.key \
     "https://localhost:8443/upstream/some/thing"
 ```
