@@ -8,6 +8,9 @@ cat ${WEBSERV_CERT} ${ISSUER_CERT} ${CA_CERT} > ${SERVER_BUNDLE}
 
 rm -f /etc/nginx/conf.d/default.conf
 cat >${NGINX_CONFIG} <<EOL
+upstream bac {
+    server backend;
+}
 server {
     listen       443 ssl;
     server_name  localhost;
@@ -25,6 +28,20 @@ server {
     location / {
         root   /usr/share/nginx/html;
         index  index.html index.htm;
+    }
+
+    location /upstream {
+        rewrite ^/upstream(.*)$ \$1 break;
+
+        proxy_set_header ssl_client_dn \$ssl_client_s_dn;
+        proxy_set_header ssl_client_fingerprint \$ssl_client_fingerprint;
+        proxy_set_header ssl_client_issuer_dn \$ssl_client_i_dn;
+        proxy_set_header Host \$host;                          
+        proxy_set_header X-Real-IP \$remote_addr;                        
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;  
+
+        proxy_pass http://backend;
+
     }
 
     error_page   500 502 503 504  /50x.html;
